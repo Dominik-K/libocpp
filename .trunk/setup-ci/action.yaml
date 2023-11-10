@@ -20,11 +20,14 @@ runs:
         git clone https://github.com/EVerest/everest-dev-environment
         cd everest-dev-environment/dependency_manager
         python3 -m pip install .
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2
     - name: Run cmake
       shell: bash
       run: |
         cmake -B build/ \
           -D CMAKE_CXX_COMPILER=clang++-15 -D CXX_STANDARD=17 \
+          -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache \
           -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
           -D CMAKE_BUILD_TYPE=Debug \
           -D CMAKE_GENERATOR="Unix Makefiles"
