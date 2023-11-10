@@ -13,6 +13,13 @@ runs:
       run: |
         cd ..
         git clone https://github.com/EVerest/everest-cmake
+    - name: Install EDM (EVerest dependency manager) # see https://everest.github.io/nightly/general/03_quick_start_guide.html#everest-dependency-manager-edm
+      shell: bash
+      run: |
+        cd ..
+        git clone https://github.com/EVerest/everest-dev-environment
+        cd everest-dev-environment/dependency_manager
+        python3 -m pip install .
     - name: Run cmake
       shell: bash
       run: |
