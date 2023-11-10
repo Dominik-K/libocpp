@@ -1,6 +1,8 @@
-Checks: >-
-  *
-  - llvmlibc-callee-namespace  # 
+# Note: wrong syntax is silently ignored. Use `clang-tidy --list-checks` to verify the settings are working.
+Checks: >- # see https://clang.llvm.org/extra/clang-tidy/checks/list.html
+  *,
+  -llvmlibc-callee-namespace,
+  bugprone-unchecked-optional-access
   # bugprone-*,
   # cppcoreguidelines-*,
   # google-*,
