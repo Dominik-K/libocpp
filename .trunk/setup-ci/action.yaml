@@ -31,4 +31,6 @@ runs:
 
     - name: Run make
       shell: bash
-      run: make -j$(nproc) install
+      run: |
+        cd build/
+        make -j$(nproc) install
