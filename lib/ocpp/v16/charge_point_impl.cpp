@@ -276,8 +276,6 @@ void ChargePointImpl::clock_aligned_meter_values_sample() {
             auto meter_value = this->get_latest_meter_value(
                 connector, this->configuration->getMeterValuesAlignedDataVector(), ReadingContext::Sample_Clock);
 
-            meter_value.value(); // <- this should trigger multiple clang-tidy warnings
-
             if (meter_value.has_value()) {
                 if (this->transaction_handler->transaction_active(connector)) {
                     this->transaction_handler->get_transaction(connector)->add_meter_value(meter_value.value());
@@ -3457,3 +3455,12 @@ ConfigurationStatus ChargePointImpl::set_custom_configuration_key(CiString<50> k
 
 } // namespace v16
 } // namespace ocpp
+
+// Test out https://clang.llvm.org/extra/clang-tidy/checks/bugprone/unchecked-optional-access.html
+void use(int i) {
+    return;
+}
+
+void f(std::optional<int> opt) {
+    use(*opt); // unsafe: it is unclear whether `opt` has a value.
+}
