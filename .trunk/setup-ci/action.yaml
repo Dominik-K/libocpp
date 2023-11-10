@@ -29,8 +29,8 @@ runs:
           -D CMAKE_BUILD_TYPE=Debug \
           -D CMAKE_GENERATOR="Unix Makefiles"
 
-    - name: Run make
+    - name: Run make # FIXME: run without `sudo`
       shell: bash
       run: |
         cd build/
-        make -j$(nproc) install
+        sudo make -j$(nproc) install
